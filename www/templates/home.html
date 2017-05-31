@@ -1,0 +1,34 @@
+<ion-view view-title="BlackBerry Repositories">
+
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+
+    <ion-nav-buttons  side="right">
+      <button class="button ion-ios-download ion-refresh" ng-click="refreshRepos()"></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content id="homeContent">
+    <!--<p><span class="listLegendForkable">■</span>: Fork-able.</p>-->
+    <div class="list" ng-if="isReposSavedOffline">
+      <div class="item headItem">Offline</div>
+      <div class="item item-text-wrap ion-chevron-right" ng-repeat="repo in offLineRepos" ng-class="{'forkableRepo': repo.fork}" ng-click="openDetail(repo)">
+        <p class="repoName">{{repo.name}}</p>
+        <p class="repoDescription">{{repo.description}}</p>
+        <p class="repoOwner">-{{repo.owner.login}}</p>
+      </div>
+    </div>
+    <div class="list">
+      <div class="item headItem" ng-if="isReposSavedOffline && repos.length>0">Online</div>
+      <div class="item item-text-wrap ion-chevron-right" ng-repeat="repo in repos" ng-class="{'forkableRepo': repo.fork}" ng-click="openDetail(repo)">
+        <p class="repoName">{{repo.name}}</p>
+        <p class="repoDescription">{{repo.description}}</p>
+        <p class="repoOwner">-{{repo.owner.login}}</p>
+      </div>
+
+      <ion-infinite-scroll ng-if="!isAllReposLoaded" on-infinite="loadMoreRepos()" distance="10%"></ion-infinite-scroll>
+      <span ng-if="isAllReposLoaded">No more available repositories.</span>
+    </div>
+  </ion-content>
+</ion-view>

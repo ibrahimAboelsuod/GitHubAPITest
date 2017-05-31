@@ -1,0 +1,22 @@
+<ion-view view-title="{{repo.name}}">
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+
+    <ion-nav-buttons  side="right">
+      <button class="button ion-ios-download saveButton" ng-click="saveRepoOffline(repo)" ng-show="!isSavedOffline(repo)"></button>
+      <button class="button ion-trash-b saveButton" ng-click="deleteOfflineCopy(repo)" ng-show="isSavedOffline(repo)"></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content id="detailContent">
+    <div class="row headerRow">
+      <div class="col col-33"><img src="{{repo.owner.avatar_url}}"></div>
+      <div class="col col-66">
+        <p class="repoName">{{repo.full_name}}</p>
+        <p class="repoDate">{{repo.created_at}}</p>
+      </div>
+    </div>
+    <button class="button button-balanced" ng-click="openURL(repo.html_url)">Visit In GitHub Page</button>
+
+  </ion-content>
+</ion-view>
